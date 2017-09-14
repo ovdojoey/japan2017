@@ -1,11 +1,4 @@
 class Event {
-  // constructor(name, location = "Japan", date, description = null) {
-  //   this.name = name;
-  //   this.location = location;
-  //   this.date = date;
-  //   this.description = description;
-  //   this.events = [];
-  // }
   constructor(params) {
     this.day = params.day;
     this.name = params.name;

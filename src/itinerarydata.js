@@ -1,7 +1,5 @@
 import Event from './Event';
 
-// let dayOne = new Event("<span class='japan__itinerary-list-item-label'>Day 1:</span> Land in Tokyo", "Tokyo, Japan", new Date(2017, 8, 19));
-
 let dayOne = new Event({
   day: "1",
   name: "Land in Tokyo",
