@@ -1,0 +1,12 @@
+.japan {
+  position: relative;
+}
+.japan__app {
+  padding: 25px;
+}
+.japan__heading {
+  padding-bottom: 20px;
+  border-bottom: 3px solid #fff;
+  text-align: center;
+  margin-bottom: 25px;
+}

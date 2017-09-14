@@ -1,0 +1,106 @@
+.japan__menu-toggle, .japan__menu-exit {
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  cursor: pointer;
+  opacity: 1;
+  transition: opacity 200ms, transform 200ms;
+  font-size: 16px;
+}
+.japan__menu-toggle-icon {
+  height: 35px;
+}
+.japan__menu-exit {
+  font-size: 42px;
+  line-height: 28px;
+  height: 28px;
+  position: fixed;
+  animation: popIn 200ms 300ms 1 forwards;
+  transform: scale(0);
+  display: none;
+}
+.japan__menu-exit:hover {
+  opacity: 1;
+  transform: scale(1.2);
+}
+.japan__menu-screen {
+  background: #fff;
+  height: 100%;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  color: #222;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  transform: translateX(-100%);
+}
+.japan__menu-screen--open {
+  animation: slideIn 300ms 1 forwards;
+}
+.japan__menu-screen--open .japan__menu-exit {
+  display: block;
+}
+.japan__menu-screen--close {
+  animation: slideOut 300ms 1 forwards;
+}
+
+/* MENU */
+.japan__menu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-around;
+  align-content: center;
+}
+.japan__menu-item {
+  width: 50%;
+  display: block;
+  padding: 10px;
+  text-align: center;
+  margin-bottom: 20px;
+  cursor: pointer;
+}
+.japan__menu-item:hover .japan__menu-item-icon {
+  transform: scale(1);
+}
+.japan__menu-item-label {
+  display: block;
+  text-align: center;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+.japan__menu-item-icon {
+  max-width: 100%;
+  height: 100px;
+  transform: scale(0.8);
+  transition: transform 200ms;
+}
+
+
+@keyframes slideIn {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+@keyframes slideOut {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+@keyframes popIn {
+  100% {
+    transform: scale(1);
+  }
+}
