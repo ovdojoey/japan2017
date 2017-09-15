@@ -6,6 +6,7 @@
   opacity: 1;
   transition: opacity 200ms, transform 200ms;
   font-size: 16px;
+  z-index: 99;
 }
 .japan__menu-toggle-icon {
   height: 35px;
@@ -18,6 +19,7 @@
   animation: popIn 200ms 300ms 1 forwards;
   transform: scale(0);
   display: none;
+  z-index: 100;
 }
 .japan__menu-exit:hover {
   opacity: 1;
@@ -35,6 +37,7 @@
   display: flex;
   justify-content: center;
   transform: translateX(-100%);
+  z-index: 99;
 }
 .japan__menu-screen--open {
   animation: slideIn 300ms 1 forwards;

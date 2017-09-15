@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import './styles/Itinerary.css';
 import chevronIcon from './icons/chevron_right.svg';
+import locationIcon from './icons/location.svg';
+import timeIcon from './icons/time.svg';
 
 
 const ItineraryEvent = props => {
@@ -22,14 +24,13 @@ class Itinerary extends Component {
   constructor(props) {
     super(props);
 
-    this.showMainEvent = this.showMainEvent.bind(this);
+    this.activeEvent = props.itinerary[1];
+    this.activeEvent.style = {
+      backgroundImage: `url(${this.activeEvent.image})`
+    };
   }
 
-  showMainEvent(evt) {
-    alert(evt.type);
-  }
-
-  formatItems() {
+  formatEventList() {
     return this.props.itinerary.map((event, idx) =>
       <ItineraryEvent
         key={idx}
@@ -38,11 +39,57 @@ class Itinerary extends Component {
     );
   }
 
+  formatDayEvents() {
+    return this.activeEvent.events.map((event, idx) =>
+      (
+        <div className="japan__itinerary-event-list-item">
+          <h4 className="japan__itinerary-event-list-title">{event.name}</h4>
+          <p className="japan__itinerary-event-list-description">{event.description}</p>
+          <div className="japan__itinerary-event-footer japan__itinerary-event-list-item-footer">
+            <ul className="japan__itinerary-event-footer-opts">
+              <li>
+                <img src={timeIcon} alt="DateTime" className="japan__itinerary-event-footer-opts-icon japan__itinerary-event-footer-opts-icon--time" />
+                {event.date.toLocaleTimeString('en-US', {hour: '2-digit', minute:'2-digit'})}
+              </li>
+              <li>
+                <img src={locationIcon} alt="Location" className="japan__itinerary-event-footer-opts-icon japan__itinerary-event-footer-opts-icon--location" />
+                {event.location}
+              </li>
+            </ul>
+          </div>
+        </div>
+      )
+    );
+  }
+
   render() {
     return (
-      <ul className="japan__itinerary-list">
-        {this.formatItems()}
-      </ul>
+      <div>
+        <ul className="japan__itinerary-list">
+          {this.formatEventList()}
+        </ul>
+        <div className="japan__itinerary-event">
+          <div className="japan__itinerary-event-hero" style={this.activeEvent.style}>
+            <h2>{this.activeEvent.name}</h2>
+            <div className="japan__itinerary-event-footer">
+              <ul className="japan__itinerary-event-footer-opts">
+                <li>
+                  <img src={timeIcon} alt="DateTime" className="japan__itinerary-event-footer-opts-icon japan__itinerary-event-footer-opts-icon--time" />
+                  {this.activeEvent.date.toLocaleDateString()}
+                </li>
+                <li>
+                  <img src={locationIcon} alt="Location" className="japan__itinerary-event-footer-opts-icon japan__itinerary-event-footer-opts-icon--location" />
+                  {this.activeEvent.location}
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <div className="japan__itinerary-event-list">
+            {this.formatDayEvents()}
+          </div>
+        </div>
+      </div>
     );
   }
 }
