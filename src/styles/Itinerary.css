@@ -3,10 +3,10 @@
   padding: 0;
   margin: 0 14px;
   text-align: left;
-  font-size: 1.3rem;
+  font-size: 1rem;
 }
 .japan__itinerary-list-item {
-  padding: 16px 0;
+  padding: 18px 0;
   position: relative;
   cursor: pointer;
 }
@@ -18,16 +18,17 @@
   left: 0px;
 }
 .japan__itinerary-list-item-day {
-  width: 85px;
+  width: 75px;
   display: inline-block;
   font-weight: bold;
+  font-size: 1.2rem
 }
 .japan__itinerary-list-item-icon {
-  height: 26px;
-  margin: 0 0 0 12px;
+  height: 1em;
+  margin: 0 0 0 6px;
   display: inline-block;
   position: relative;
-  top: 8px;
+  top: 5px;
 }
 
 
@@ -40,9 +41,29 @@
   color: #fff;
   height: 100%;
   width: 100%;
-  box-shadow: 0px 5px 12px -2px rgba(2,2,2,0.5);
   overflow-y: scroll; /* has to be scroll, not auto */
   -webkit-overflow-scrolling: touch;
+  display: none;
+}
+.japan__itinerary-event--open {
+  height: 100%;
+  width: 100%;
+  animation: fadeIn 200ms 1 forwards;
+  display: block;
+}
+.japan__itinerary-event--close {
+  height: 100%;
+  width: 100%;
+  animation: fadeDown 200ms 1 forwards;
+  display: block;
+}
+.japan__itinerary-event-exit {
+  position: absolute;
+  top: -2px;
+  right: 12px;
+  color: #fff;
+  font-size: 36px;
+  z-index: 10;
 }
 .japan__itinerary-event-hero {
   height: 140px;
@@ -65,7 +86,7 @@
   bottom: 0;
   font-size: 11px;
   z-index: 1;
-  padding: 0 5% 10px;
+  padding: 0 16px 10px;
   font-weight: bold;
 }
 .japan__itinerary-event-footer-opts {
@@ -93,8 +114,6 @@
 .japan__itinerary-event-footer-opts-icon--time {
   top: 5px;
 }
-
-
 .japan__itinerary-event-hero::after {
   background: linear-gradient(135deg, #800284 1%,#ba2ea0 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
   position: absolute;
@@ -107,40 +126,17 @@
   opacity: 0.5;
 }
 .japan__itinerary-event-list {
-  width: 90%;
-  margin: 5%;
-  animation: popIn 400ms 1 forwards;
-}
-.japan__itinerary-event--pop-in {
-  animation: popIn 400ms 1 forwards;
-}
-
-.japan__itinerary-event-list-item {
-  padding: 12px;
-  padding-bottom: 30px;
-  border-left: 2px dashed rgba(255,255,255,0.5);
-  margin-bottom: 24px;
-  position: relative;
-}
-.japan__itinerary-event-list-title {
-  margin: 0;
-}
-.japan__itinerary-event-list-description {
-  padding: 0;
-  margin: 0;
-  font-size: 0.8rem;
-}
-.japan__itinerary-event-list-item-footer {
-  padding: 0 12px;
-  margin: 0;
-  color: #ccc;
-  font-weight: 400;
-  font-size: 10px;
+  width: 100%;
+  padding: 16px;
+  animation: slideUp 400ms 100ms 1 forwards;
+  opacity: 0.2;
+  transform: translateY(100%);
+  overflow: hidden;
 }
 
 
 
-@keyframes popIn {
+@keyframes slideUp {
   0% {
     opacity: 0.2;
     transform: translateY(20%);
@@ -151,5 +147,27 @@
   100% {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeDown {
+  0% {
+    opacity: 1;
+  }
+  60% {
+    transform: translateY(30%);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(30%);
   }
 }

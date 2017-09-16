@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
+import SubEvent from './SubEvent';
+import {chevronIcon, locationIcon, timeIcon} from './icons/icons.js';
 import './styles/Itinerary.css';
-import chevronIcon from './icons/chevron_right.svg';
-import locationIcon from './icons/location.svg';
-import timeIcon from './icons/time.svg';
-
 
 const ItineraryEvent = props => {
   const handleClick = () => {
+    props.setActiveEvent(props.event);
     console.log(props.event);
   }
   return (
@@ -19,45 +18,114 @@ const ItineraryEvent = props => {
   );
 };
 
+const DayEvent = props => {
+
+  const closeActiveEvent = ((props) => {
+    let yTouchStart = 0;
+    let yTouchMove = 0;
+    const _closeActiveEvent = (evt) => {
+      if (evt.type === "touchstart") {
+        yTouchStart = evt.touches[0].clientY;
+      }
+      if (evt.type === "touchmove") {
+        yTouchMove = evt.touches[0].clientY;
+      }
+      if (evt.type === "touchend") {
+        let diff = (yTouchStart - yTouchMove);
+        if (diff < -20) {
+          props.closeActiveEvent();
+        }
+      }
+    };
+    return _closeActiveEvent;
+  })(props);
+
+  const forceCloseEvent = () => {
+    props.closeActiveEvent();
+  }
+
+  return (
+    <div className={props.activeEvent.eventClassName}>
+      <div className="japan__itinerary-event-hero" style={props.activeEvent.heroStyle} onTouchStart={closeActiveEvent} onTouchMove={closeActiveEvent} onTouchEnd={closeActiveEvent}>
+        <div className="japan__itinerary-event-exit" onClick={forceCloseEvent}>&times;</div>
+        <h2>{props.activeEvent.name}</h2>
+        <div className="japan__itinerary-event-footer">
+          <ul className="japan__itinerary-event-footer-opts">
+            <li>
+              <img src={timeIcon} alt="DateTime" className="japan__itinerary-event-footer-opts-icon japan__itinerary-event-footer-opts-icon--time" />
+              {props.activeEvent.date.toLocaleDateString()}
+            </li>
+            <li>
+              <img src={locationIcon} alt="Location" className="japan__itinerary-event-footer-opts-icon japan__itinerary-event-footer-opts-icon--location" />
+              {props.activeEvent.location}
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div className="japan__itinerary-event-list">
+        {props.formatDayEvents()}
+      </div>
+    </div>
+  );
+}
+
 class Itinerary extends Component {
 
   constructor(props) {
     super(props);
 
-    this.activeEvent = props.itinerary[1];
-    this.activeEvent.style = {
-      backgroundImage: `url(${this.activeEvent.image})`
+    let activeEvent = props.itinerary[1];
+    activeEvent.heroStyle = {backgroundImage: `url(${activeEvent.image})`};
+    activeEvent.eventClassName = 'japan__itinerary-event';
+    this.state = {
+      activeEvent: activeEvent
+    }
+
+    this.formatDayEvents = this.formatDayEvents.bind(this);
+    this.closeActiveEvent = this.closeActiveEvent.bind(this);
+  }
+
+  setActiveEvent(event) {
+    event.heroStyle = {
+      backgroundImage: `url(${event.image})`
     };
+    event.eventClassName = 'japan__itinerary-event  japan__itinerary-event--open';
+    this.setState({
+      activeEvent: event
+    });
+  }
+
+  closeActiveEvent() {
+    window.scrollTo(0, 0);
+    let event = this.state.activeEvent;
+    event.eventClassName = 'japan__itinerary-event  japan__itinerary-event--open japan__itinerary-event--close';
+    this.setState({
+      activeEvent: event
+    });
+
+    setTimeout(() => {
+      event.eventClassName = 'japan__itinerary-event';
+      this.setState({
+        activeEvent: event
+      });
+    }, 400);
   }
 
   formatEventList() {
     return this.props.itinerary.map((event, idx) =>
       <ItineraryEvent
         key={idx}
+        setActiveEvent={this.setActiveEvent.bind(this)}
         event={event}
         />
     );
   }
 
   formatDayEvents() {
-    return this.activeEvent.events.map((event, idx) =>
+    return this.state.activeEvent.events.map((event, idx) =>
       (
-        <div className="japan__itinerary-event-list-item">
-          <h4 className="japan__itinerary-event-list-title">{event.name}</h4>
-          <p className="japan__itinerary-event-list-description">{event.description}</p>
-          <div className="japan__itinerary-event-footer japan__itinerary-event-list-item-footer">
-            <ul className="japan__itinerary-event-footer-opts">
-              <li>
-                <img src={timeIcon} alt="DateTime" className="japan__itinerary-event-footer-opts-icon japan__itinerary-event-footer-opts-icon--time" />
-                {event.date.toLocaleTimeString('en-US', {hour: '2-digit', minute:'2-digit'})}
-              </li>
-              <li>
-                <img src={locationIcon} alt="Location" className="japan__itinerary-event-footer-opts-icon japan__itinerary-event-footer-opts-icon--location" />
-                {event.location}
-              </li>
-            </ul>
-          </div>
-        </div>
+        <SubEvent key={idx} event={event} />
       )
     );
   }
@@ -68,27 +136,7 @@ class Itinerary extends Component {
         <ul className="japan__itinerary-list">
           {this.formatEventList()}
         </ul>
-        <div className="japan__itinerary-event">
-          <div className="japan__itinerary-event-hero" style={this.activeEvent.style}>
-            <h2>{this.activeEvent.name}</h2>
-            <div className="japan__itinerary-event-footer">
-              <ul className="japan__itinerary-event-footer-opts">
-                <li>
-                  <img src={timeIcon} alt="DateTime" className="japan__itinerary-event-footer-opts-icon japan__itinerary-event-footer-opts-icon--time" />
-                  {this.activeEvent.date.toLocaleDateString()}
-                </li>
-                <li>
-                  <img src={locationIcon} alt="Location" className="japan__itinerary-event-footer-opts-icon japan__itinerary-event-footer-opts-icon--location" />
-                  {this.activeEvent.location}
-                </li>
-              </ul>
-            </div>
-          </div>
-
-          <div className="japan__itinerary-event-list">
-            {this.formatDayEvents()}
-          </div>
-        </div>
+        <DayEvent activeEvent={this.state.activeEvent} formatDayEvents={this.formatDayEvents} closeActiveEvent={this.closeActiveEvent} />
       </div>
     );
   }

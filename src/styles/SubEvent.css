@@ -1,0 +1,132 @@
+
+.japan__itinerary-event-list-item {
+  padding: 8px 12px;
+  border-left: 2px solid purple;
+  margin-bottom: 24px;
+  position: relative;
+}
+.japan__itinerary-event-list-item-container {
+  position: relative;
+  transition: transform 180ms;
+  padding-bottom: 30px;
+}
+.japan__itinerary-event-list-title {
+  margin: 0;
+}
+.japan__itinerary-event-list-description {
+  padding: 0;
+  margin: 0;
+  font-size: 0.8rem;
+}
+.japan__itinerary-event-list-item .japan__itinerary-event-list-item-footer {
+  padding: 0;
+  margin: 0;
+  color: #ccc;
+  font-weight: 400;
+  font-size: 10px;
+  bottom: 2px;
+}
+.japan__itinerary-event-list-item .japan__itinerary-event-footer-opts {
+  justify-content: flex-start;
+}
+.japan__itinerary-event-list-item .japan__itinerary-event-footer-opts li {
+  margin-right: 10px;
+}
+.japan__itinerary-event-sidebar {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 250px;
+  height: 100%;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  right: -16px;
+}
+.japan__itinerary-event-sidebar-menu {
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.japan__itinerary-event-sidebar-menu-dots {
+  height: 4px;
+  width: 4px;
+  border-radius: 50%;
+  background: teal;
+  display: block;
+  position: relative;
+}
+.japan__itinerary-event-sidebar-menu-dots::after,.japan__itinerary-event-sidebar-menu-dots::before{
+  content: '';
+  height: 4px;
+  width: 4px;
+  background: teal;
+  position: absolute;
+  display: block;
+  border-radius: 50%;
+  bottom: 10px;
+}
+.japan__itinerary-event-sidebar-menu-dots::after {
+  top: 10px;
+}
+
+/* OPEN AND BOUNCE */
+.japan__itinerary-event-sidebar--open .japan__itinerary-event-sidebar-items {
+  transform: translateX(0);
+}
+.japan__itinerary-event-sidebar--open {
+  border-color: transparent;
+}
+.japan__itinerary-event-sidebar--open .japan__itinerary-event-list-item-container {
+  transform: translateX(-20%) scale(0.9);
+}
+.japan__itinerary-event-sidebar--bounce .japan__itinerary-event-sidebar-items {
+  animation: bounceSidebar 1 500ms forwards cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.japan__itinerary-event-sidebar-items {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  box-shadow: -3px 0px 10px -2px rgba(2,2,2,0.4);
+  z-index: 10;
+  transform: translateX(102%);
+  transition: transform 250ms;
+}
+.japan__itinerary-event-sidebar-item {
+  width: 50%;
+  background: #111;
+  display: flex;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+  position: relative;
+  flex-wrap: wrap;
+  text-align: center;
+}
+.japan__itinerary-event-sidebar-item--memory {
+  background: purple;
+}
+.japan__itinerary-event-sidebar-item--highlight {
+  background: #723AEA;
+}
+.japan__itinerary-event-sidebar-item img {
+  filter: invert(1);
+  width: 25px;
+  margin: -8px 0;
+  display: inline-block;
+}
+.japan__itinerary-event-sidebar-item span {
+  display: block;
+}
+
+@keyframes bounceSidebar {
+  50% {
+    transform: translateX(90%);
+  }
+}

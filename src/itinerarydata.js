@@ -1,6 +1,7 @@
 import Event from './Event';
 import tokyoImg from './images/tokyo.jpg';
 import fishMarketImg from './images/fishMarket.jpg';
+import shibuyaImg from './images/shibuya.jpg';
 
 let dayOne = new Event({
   day: "1",
@@ -67,9 +68,36 @@ let dayTwo = new Event({
   description: "Last train leaves at 11:30"
 });
 
+let dayThree = new Event({
+  day: "3",
+  name: "Shibuya & Asakusa",
+  location: "Shibuya, Tokyo",
+  image: shibuyaImg,
+  date: new Date(2017, 8, 21)
+}).addEvent({
+  day: "2",
+  name: "Meiji Shrine",
+  location: "Shibuya, Tokyo",
+  date: new Date(2017, 8, 21, 7, 0),
+  description: "Relax at the Meiji Shrine and Imperial Garden"
+}).addEvent({
+  day: "2",
+  name: "Yoyogi Park",
+  location: "Shibuya, Tokyo",
+  date: new Date(2017, 8, 21, 10, 0),
+  description: "Explore the ginko tree forest, which turns intensely golden in autumn"
+}).addEvent({
+  day: "2",
+  name: "Koen Dori & Spain Slope",
+  location: "Shibuya, Tokyo",
+  date: new Date(2017, 8, 21, 13, 0),
+  description: "Shop on Park Street and visit Spain Slope"
+});
+
 const itinerary = [
   dayOne,
-  dayTwo
+  dayTwo,
+  dayThree
 ]
 
 

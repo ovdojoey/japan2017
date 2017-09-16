@@ -1,11 +1,6 @@
 import React, { Component } from 'react';
 import './styles/Menu.css';
-
-import itenaryIcon from './icons/itinerary.svg';
-import starIcon from './icons/star.svg';
-import menuIcon from './icons/menu.svg';
-import importantIcon from './icons/important.svg';
-import memoriesIcon from './icons/memories.svg';
+import {itenaryIcon, starIcon, menuIcon, importantIcon, memoriesIcon} from './icons/icons.js';
 
 class Menu extends Component {
   constructor(props) {
