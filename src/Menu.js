@@ -9,12 +9,33 @@ class Menu extends Component {
       isScreenOpen: null
     };
     this.toggleScreen = this.toggleScreen.bind(this);
+    this.openItinerary = this.openItinerary.bind(this);
+    this.openMemories = this.openMemories.bind(this);
+    this.openHighlights = this.openHighlights.bind(this);
+    this.openReminders = this.openReminders.bind(this);
   }
 
   toggleScreen() {
     this.setState(prevState => ({
       isScreenOpen: !!(!prevState.isScreenOpen)
     }));
+  }
+
+  openItinerary(evt) {
+    this.toggleScreen();
+    this.props.screenHandlers.itinerary(evt);
+  }
+  openMemories(evt) {
+    this.toggleScreen();
+    this.props.screenHandlers.memories(evt);
+  }
+  openHighlights(evt) {
+    this.toggleScreen();
+    this.props.screenHandlers.highlights(evt);
+  }
+  openReminders(evt) {
+    this.toggleScreen();
+    this.props.screenHandlers.reminders(evt);
   }
 
   screenClass() {
@@ -28,14 +49,15 @@ class Menu extends Component {
   render() {
     return (
       <div>
-        <a className="japan__menu-toggle" onClick={this.toggleScreen}>
+        <div className={this.state.isScreenOpen ? 'japan__menu-sheen japan__menu-sheen--show' : 'japan__menu-sheen'}></div>
+        <a className={this.state.isScreenOpen ? 'japan__menu-toggle japan__menu-toggle--hide' : 'japan__menu-toggle'} onClick={this.toggleScreen}>
           <img className="japan__menu-toggle-icon" src={menuIcon} alt="Menu" />
         </a>
         <div className={this.screenClass()}>
           <span onClick={this.toggleScreen} className="japan__menu-exit">&times;</span>
           <ul className="japan__menu">
             <li className="japan__menu-item">
-              <a>
+              <a onClick={this.openItinerary}>
                 <img className="japan__menu-item-icon" src={itenaryIcon} alt="Itinerary" />
                 <span className="japan__menu-item-label">
                   Itinerary
@@ -43,7 +65,7 @@ class Menu extends Component {
               </a>
             </li>
             <li className="japan__menu-item">
-              <a>
+              <a onClick={this.openHighlights}>
                 <img className="japan__menu-item-icon" src={starIcon} alt="Highlights" />
                 <span className="japan__menu-item-label">
                   Highlights
@@ -51,15 +73,15 @@ class Menu extends Component {
               </a>
             </li>
             <li className="japan__menu-item">
-              <a>
+              <a onClick={this.openReminders}>
                 <img className="japan__menu-item-icon" src={importantIcon} alt="Importants" />
                 <span className="japan__menu-item-label">
-                  Don&rsquo;t Forget
+                  Reminders
                 </span>
               </a>
             </li>
             <li className="japan__menu-item">
-              <a>
+              <a onClick={this.openMemories}>
                 <img className="japan__menu-item-icon" src={memoriesIcon} alt="Memories" />
                 <span className="japan__menu-item-label">
                   Memories

@@ -1,9 +1,11 @@
 .japan__itinerary-list {
   list-style: none;
   padding: 0;
-  margin: 0 14px;
+  margin: 0;
   text-align: left;
   font-size: 1rem;
+  animation: fadeIn 300ms 140ms 1 forwards;
+  opacity: 0;
 }
 .japan__itinerary-list-item {
   padding: 18px 0;
@@ -18,7 +20,7 @@
   left: 0px;
 }
 .japan__itinerary-list-item-day {
-  width: 75px;
+  width: 80px;
   display: inline-block;
   font-weight: bold;
   font-size: 1.2rem
@@ -34,20 +36,16 @@
 
 /* Event screen */
 .japan__itinerary-event {
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
+  bottom: 0;
+  right: 0;
   background: #222;
   color: #fff;
-  height: 100%;
-  width: 100%;
-  overflow-y: scroll; /* has to be scroll, not auto */
-  -webkit-overflow-scrolling: touch;
   display: none;
 }
 .japan__itinerary-event--open {
-  height: 100%;
-  width: 100%;
   animation: fadeIn 200ms 1 forwards;
   display: block;
 }
@@ -59,7 +57,7 @@
 }
 .japan__itinerary-event-exit {
   position: absolute;
-  top: -2px;
+  top: 0px;
   right: 12px;
   color: #fff;
   font-size: 36px;
@@ -163,11 +161,8 @@
   0% {
     opacity: 1;
   }
-  60% {
-    transform: translateY(30%);
-  }
   100% {
     opacity: 0;
-    transform: translateY(30%);
+    transform: translateY(10%);
   }
 }

@@ -1,0 +1,28 @@
+.japan__screen__reminders {
+  background: linear-gradient(135deg, #347dbb 0%,#2bcada 100%);
+}
+.japan__reminders-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  font-size: 1.2rem;
+  animation: fadeIn 300ms 240ms 1 forwards;
+  opacity: 0;
+}
+.japan__reminders-list-item {
+  margin-bottom: 12px;
+  transition: opacity 200ms, transform 200ms;
+}
+.japan__reminders-list-item--done {
+  /*text-decoration: line-through;*/
+  opacity: 0.9;
+  transform: translateX(18px);
+  position: relative;
+}
+.japan__reminders-list-item--done::before {
+  content: "✓";
+  font-size: 1.2rem;
+  color: #00FF00;
+  position: absolute;
+  left: -18px;
+}

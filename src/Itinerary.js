@@ -6,7 +6,6 @@ import './styles/Itinerary.css';
 const ItineraryEvent = props => {
   const handleClick = () => {
     props.setActiveEvent(props.event);
-    console.log(props.event);
   }
   return (
     <li className="japan__itinerary-list-item" onClick={handleClick}>
@@ -46,25 +45,27 @@ const DayEvent = props => {
 
   return (
     <div className={props.activeEvent.eventClassName}>
-      <div className="japan__itinerary-event-hero" style={props.activeEvent.heroStyle} onTouchStart={closeActiveEvent} onTouchMove={closeActiveEvent} onTouchEnd={closeActiveEvent}>
-        <div className="japan__itinerary-event-exit" onClick={forceCloseEvent}>&times;</div>
-        <h2>{props.activeEvent.name}</h2>
-        <div className="japan__itinerary-event-footer">
-          <ul className="japan__itinerary-event-footer-opts">
-            <li>
-              <img src={timeIcon} alt="DateTime" className="japan__itinerary-event-footer-opts-icon japan__itinerary-event-footer-opts-icon--time" />
-              {props.activeEvent.date.toLocaleDateString()}
-            </li>
-            <li>
-              <img src={locationIcon} alt="Location" className="japan__itinerary-event-footer-opts-icon japan__itinerary-event-footer-opts-icon--location" />
-              {props.activeEvent.location}
-            </li>
-          </ul>
+      <div className="japan__content-wrap">
+        <div className="japan__itinerary-event-hero" style={props.activeEvent.heroStyle} onTouchStart={closeActiveEvent} onTouchMove={closeActiveEvent} onTouchEnd={closeActiveEvent}>
+          <div className="japan__itinerary-event-exit" onClick={forceCloseEvent}>&times;</div>
+          <h2>{props.activeEvent.name}</h2>
+          <div className="japan__itinerary-event-footer">
+            <ul className="japan__itinerary-event-footer-opts">
+              <li>
+                <img src={timeIcon} alt="DateTime" className="japan__itinerary-event-footer-opts-icon japan__itinerary-event-footer-opts-icon--time" />
+                {props.activeEvent.date.toLocaleDateString()}
+              </li>
+              <li>
+                <img src={locationIcon} alt="Location" className="japan__itinerary-event-footer-opts-icon japan__itinerary-event-footer-opts-icon--location" />
+                {props.activeEvent.location}
+              </li>
+            </ul>
+          </div>
         </div>
-      </div>
 
-      <div className="japan__itinerary-event-list">
-        {props.formatDayEvents()}
+        <div className="japan__itinerary-event-list">
+          {props.formatSubEvents()}
+        </div>
       </div>
     </div>
   );
@@ -79,20 +80,23 @@ class Itinerary extends Component {
     activeEvent.heroStyle = {backgroundImage: `url(${activeEvent.image})`};
     activeEvent.eventClassName = 'japan__itinerary-event';
     this.state = {
-      activeEvent: activeEvent
+      activeEvent: activeEvent,
+      subEventOpened: false
     }
 
-    this.formatDayEvents = this.formatDayEvents.bind(this);
+    this.formatSubEvents = this.formatSubEvents.bind(this);
     this.closeActiveEvent = this.closeActiveEvent.bind(this);
   }
 
   setActiveEvent(event) {
+    window.scrollTo(0, 0);
     event.heroStyle = {
       backgroundImage: `url(${event.image})`
     };
     event.eventClassName = 'japan__itinerary-event  japan__itinerary-event--open';
     this.setState({
-      activeEvent: event
+      activeEvent: event,
+      subEventOpened: true
     });
   }
 
@@ -101,7 +105,8 @@ class Itinerary extends Component {
     let event = this.state.activeEvent;
     event.eventClassName = 'japan__itinerary-event  japan__itinerary-event--open japan__itinerary-event--close';
     this.setState({
-      activeEvent: event
+      activeEvent: event,
+      subEventOpened: false
     });
 
     setTimeout(() => {
@@ -122,7 +127,7 @@ class Itinerary extends Component {
     );
   }
 
-  formatDayEvents() {
+  formatSubEvents() {
     return this.state.activeEvent.events.map((event, idx) =>
       (
         <SubEvent key={idx} event={event} />
@@ -132,11 +137,14 @@ class Itinerary extends Component {
 
   render() {
     return (
-      <div>
-        <ul className="japan__itinerary-list">
-          {this.formatEventList()}
-        </ul>
-        <DayEvent activeEvent={this.state.activeEvent} formatDayEvents={this.formatDayEvents} closeActiveEvent={this.closeActiveEvent} />
+      <div className={this.props.className}>
+        <div className="japan__screen__content">
+          <h1 className="japan__heading">Japan</h1>
+          <ul className={(this.state.subEventOpened) ? "japan__itinerary-list japan__hide" : "japan__itinerary-list"}>
+            {this.formatEventList()}
+          </ul>
+          <DayEvent activeEvent={this.state.activeEvent} formatSubEvents={this.formatSubEvents} closeActiveEvent={this.closeActiveEvent} />
+        </div>
       </div>
     );
   }

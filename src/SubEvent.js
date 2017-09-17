@@ -15,14 +15,11 @@ class SubEvent extends Component {
       xTouchStart: 0,
       xTouchMove: 0
     };
-
-    this.bounceSidebar = this.openSidebar.bind(this, "bounce");
     this.openSidebar = this.openSidebar.bind(this);
     this.handleTouchMove = this.handleTouchMove.bind(this);
   }
 
   handleTouchMove(evt) {
-    console.log(evt.type);
     if (evt.type === "touchstart") {
       this.touches.xTouchStart = evt.touches[0].clientX;
     }
@@ -32,28 +29,20 @@ class SubEvent extends Component {
     if (evt.type === "touchend") {
       let diff = (this.touches.xTouchStart - this.touches.xTouchMove);
 
-      if (diff < -20) {
+      if (diff < -40 && (this.touches.xTouchMove > 0)) {
         this.closeSidebar();
-      } else if (diff > 20) {
+      } else if (diff > 40 && (this.touches.xTouchMove > 0)) {
         this.openSidebar();
       }
     }
   }
 
-  openSidebar(bounce = false) {
+  openSidebar() {
     let sidebarClass = 'japan__itinerary-event-list-item';
-    let addClass = (bounce) ? "japan__itinerary-event-sidebar--bounce" : "japan__itinerary-event-sidebar--open";
-    let newClass = `${sidebarClass} ${addClass}`;
+    let newClass = `${sidebarClass} japan__itinerary-event-sidebar--open`;
     this.setState({
       itemClass: newClass
     });
-    if (bounce) {
-      setTimeout(() => {
-        this.setState({
-          itemClass: sidebarClass
-        });
-      }, 400);
-    }
   }
 
   closeSidebar() {
@@ -83,17 +72,17 @@ class SubEvent extends Component {
           </div>
         </div>
         <div className="japan__itinerary-event-sidebar">
-          <div className="japan__itinerary-event-sidebar-menu" onClick={this.openSidebar} onTouchEnd={this.bounceSidebar}>
+          <div className="japan__itinerary-event-sidebar-menu" onClick={this.openSidebar}>
             <span className="japan__itinerary-event-sidebar-menu-dots"></span>
           </div>
           <ul className="japan__itinerary-event-sidebar-items">
-            <li className="japan__itinerary-event-sidebar-item japan__itinerary-event-sidebar-item--highlight">
+            <li className="japan__itinerary-event-sidebar-item japan__itinerary-event-sidebar-item--highlight" onClick={()=>alert('t')}>
               <div>
                 <img src={starIcon} alt="Highlight" />
                 <span>Highlight</span>
               </div>
             </li>
-            <li className="japan__itinerary-event-sidebar-item japan__itinerary-event-sidebar-item--memory">
+            <li className="japan__itinerary-event-sidebar-item japan__itinerary-event-sidebar-item--memory" onClick={()=>alert('y')}>
               <div>
                 <img src={memoriesIcon} alt="Add Memory" />
                 <span>Add Memory</span>

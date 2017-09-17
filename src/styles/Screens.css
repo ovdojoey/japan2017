@@ -1,0 +1,35 @@
+.japan__screen {
+  display: none;
+  transform: translateX(0);
+  animation: slideLeft 300ms 40ms 1 forwards;
+}
+.japan__screen__content {
+  padding: 24px;
+  min-height: 100vh;
+}
+.japan__screen--active {
+  animation: slideRight 300ms 100ms 1 forwards;
+  transform: translateX(100%);
+  display: block;
+}
+.japan__heading {
+  padding: 20px 0 0 0;
+  text-align: center;
+  margin-top: 0;
+  letter-spacing: 2px;
+  font-weight: 400;
+  display: block;
+}
+
+
+@keyframes slideRight {
+  100% {
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideLeft {
+  100% {
+    transform: translateX(-100%);
+  }
+}
