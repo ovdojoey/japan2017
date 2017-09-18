@@ -29,7 +29,7 @@ let dayOne = new Event({
   description: "Check in at the b tokyo akasaka-mitsuke.  Address: Minato-ku, Akasaka 3-21-7 Tokyo, Minato Ward 107-0052"
 })).addEvent(new Event({
   day: "1",
-  name: "Sleep with baby",
+  name: "Sleep",
   location: "b tokyo akasaka-mitsuke",
   date: new Date(2017, 8, 19, 20, 30),
   description: "🤗"
@@ -59,7 +59,7 @@ let dayTwo = new Event({
   name: "Ginza",
   location: "Ginza, Japan",
   date: new Date(2017, 8, 20, 13, 0),
-  description: "Walk and shop.  Visit Uniglow for baby"
+  description: "Walk and shop.  Visit Uniqlo"
 }).addEvent({
   day: "2",
   name: "Shinjuku",
@@ -212,7 +212,7 @@ let daySix = new Event({
 
 let daySeven = new Event({
   day: "7",
-  name: "Day trip to see the Temples of Nara",
+  name: "Day trip to Nara",
   location: "Osaka, Japan",
   image: osakaImg,
   date: new Date(2017, 8, 25)
@@ -250,7 +250,7 @@ let dayEight = new Event({
   date: new Date(2017, 8, 26)
 }).addEvent({
   day: "8",
-  name: "Bullet train to Takyama",
+  name: "Bullet train to Takayama",
   location: "Osaka, Japan",
   date: new Date(2017, 8, 26, 7, 0),
   description: "Hop on the Tokaido Shinkanse to Takayama"

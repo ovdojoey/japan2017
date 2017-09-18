@@ -1,14 +1,13 @@
 import React, { Component } from 'react';
-import './styles/Memories.css';
+import './styles/Highlights.css';
 import Storage from './Storage';
 
 
-
-class Memories extends Component {
+class Highlights extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      memories: Storage.get("memories") || []
+      highlights: Storage.get("highlights") || []
     };
   }
 
@@ -17,8 +16,8 @@ class Memories extends Component {
       <div className={this.props.className}>
         <div className="japan__screen__content">
           {
-            (this.state.memories.length === 0) &&
-            <p className="japan__memories__none">You haven't added any memories yet</p>
+            (this.state.highlights.length === 0) &&
+            <p className="japan__memories__none">You haven't added any highlights yet.</p>
           }
         </div>
       </div>
@@ -26,4 +25,4 @@ class Memories extends Component {
   }
 }
 
-export default Memories;
+export default Highlights;

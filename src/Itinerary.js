@@ -11,8 +11,10 @@ const ItineraryEvent = props => {
     <li className="japan__itinerary-list-item" onClick={handleClick}>
       <span className="japan__itinerary-list-item-date">{props.event.date.toLocaleDateString()}</span>
       <span className="japan__itinerary-list-item-day">Day {props.event.day}:</span>
-      {props.event.name}
-      <img className="japan__itinerary-list-item-icon" src={chevronIcon} aria-hidden="true" alt="" />
+      <span className="japan__itinerary-list-item-name">
+        {props.event.name}
+        <img className="japan__itinerary-list-item-icon" src={chevronIcon} aria-hidden="true" alt="" />
+      </span>
     </li>
   );
 };

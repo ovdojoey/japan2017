@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './styles/Reminders.css';
+import Storage from './Storage';
 
 const defaultReminderList = [
   {
@@ -41,23 +42,6 @@ const defaultReminderList = [
   }
 ];
 
-const storage = {
-  get: function(key = "reminders") {
-    return this.convertJSONToObject(localStorage.getItem(key));
-  },
-  put: function(value, key = "reminders") {
-    let string =  this.convertToJSONString(value);
-    localStorage.setItem(key, string);
-    return this.get();
-  },
-  convertToJSONString: function(object) {
-    return JSON.stringify(object);
-  },
-  convertJSONToObject: function(string) {
-    return JSON.parse(string);
-  }
-};
-
 class Item extends Component {
   constructor(props) {
     super(props);
@@ -77,7 +61,7 @@ class Reminders extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      reminderList: storage.get() || storage.put(defaultReminderList)
+      reminderList: Storage.get("reminders") || Storage.put(defaultReminderList, "reminders") || []
     };
     this.toggleItemDone = this.toggleItemDone.bind(this);
   }
@@ -94,7 +78,7 @@ class Reminders extends Component {
     this.setState({
       reminderList: _state
     });
-    storage.put(this.state.reminderList);
+    Storage.put(this.state.reminderList, "reminders");
   }
   render() {
     return (

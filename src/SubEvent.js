@@ -76,13 +76,13 @@ class SubEvent extends Component {
             <span className="japan__itinerary-event-sidebar-menu-dots"></span>
           </div>
           <ul className="japan__itinerary-event-sidebar-items">
-            <li className="japan__itinerary-event-sidebar-item japan__itinerary-event-sidebar-item--highlight" onClick={()=>alert('t')}>
+            <li className="japan__itinerary-event-sidebar-item japan__itinerary-event-sidebar-item--highlight" onClick={()=>alert(JSON.stringify(this.props.event))}>
               <div>
                 <img src={starIcon} alt="Highlight" />
                 <span>Highlight</span>
               </div>
             </li>
-            <li className="japan__itinerary-event-sidebar-item japan__itinerary-event-sidebar-item--memory" onClick={()=>alert('y')}>
+            <li className="japan__itinerary-event-sidebar-item japan__itinerary-event-sidebar-item--memory" onClick={()=>alert(JSON.stringify(this.props.event))}>
               <div>
                 <img src={memoriesIcon} alt="Add Memory" />
                 <span>Add Memory</span>

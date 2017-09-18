@@ -11,19 +11,23 @@
   padding: 18px 0;
   position: relative;
   cursor: pointer;
+  display: flex;
 }
 .japan__itinerary-list-item-date {
-  font-size: 12px;
+  font-size: 11px;
   color: rgba(255,255,255,0.6);
   position: absolute;
-  bottom: 0px;
+  top: 40px;
   left: 0px;
 }
 .japan__itinerary-list-item-day {
-  width: 80px;
-  display: inline-block;
+  width: 90px;
+  display: block;
   font-weight: bold;
-  font-size: 1.2rem
+}
+.japan__itinerary-list-item-name {
+  width: 100%;
+  display: block;
 }
 .japan__itinerary-list-item-icon {
   height: 1em;
@@ -32,7 +36,6 @@
   position: relative;
   top: 5px;
 }
-
 
 /* Event screen */
 .japan__itinerary-event {
