@@ -4,7 +4,7 @@
   animation: slideLeft 300ms 40ms 1 forwards;
 }
 .japan__screen__content {
-  padding: 26px;
+  padding: 0 26px;
   min-height: 100vh;
 }
 .japan__screen--active {

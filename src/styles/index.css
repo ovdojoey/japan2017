@@ -4,7 +4,7 @@
 html {
   height: 100%;
   -webkit-text-size-adjust: 100%; /* Prevent font scaling in landscape while allowing user zoom */
-  background: purple;
+  background: #111;
 }
 body {
   margin: 0;
@@ -15,5 +15,6 @@ body {
   color: #fff;
   min-height: 100%;
   background: linear-gradient(135deg, #1d6f28 0%,#4334bb 100%);
+  background: linear-gradient(135deg, #41295a 0%,#2F0743 100%);
 
 }
